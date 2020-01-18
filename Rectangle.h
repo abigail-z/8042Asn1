@@ -21,7 +21,7 @@ bool AreaCompare(const Rectangle a, const Rectangle b)
 	int aArea = a.GetLength() * a.GetWidth();
 	int bArea = b.GetLength() * b.GetWidth();
 
-	return aArea > bArea;
+	return aArea <= bArea;
 }
 
 bool PerimeterCompare(const Rectangle a, const Rectangle b)
@@ -29,16 +29,16 @@ bool PerimeterCompare(const Rectangle a, const Rectangle b)
 	int aPerimeter = a.GetLength() * 2 + a.GetWidth() * 2;
 	int bPerimeter = b.GetLength() * 2 + b.GetWidth() * 2;
 
-	return aPerimeter > bPerimeter;
+	return aPerimeter <= bPerimeter;
 }
 
 template <typename Object, typename Comparator>
-const Object& findMax(const std::vector<Object>& arr, Comparator isGreaterThan)
+const Object& findMax(const std::vector<Object>& arr, Comparator isLessThan)
 {
     int maxIndex = 0;
     
     for (int i = 1; i < arr.size(); ++i)
-        if (isGreaterThan(arr[i], arr[maxIndex]))
+        if (isLessThan(arr[maxIndex], arr[i]))
             maxIndex = i;
     
     return arr[maxIndex];

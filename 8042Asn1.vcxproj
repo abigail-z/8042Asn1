@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Josephus.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Person.h" />
     <ClInclude Include="Rectangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

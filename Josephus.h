@@ -1,5 +1,8 @@
 #include <iostream>
 #include <list>
+#include <iostream>
+
+#include "Person.h"
 
 // The Josephus problem is the following game:
 //  N people, numbered 1 to N, are sitting in a circle.
@@ -15,7 +18,23 @@
 // n is number of passes before elimination
 int Josephus(int m, int n)
 {
-    // Hint for making the algorithm efficient: think carefully how to determine next player to eliminate
+	Person* head = new Person(1);
+	Person* current = head;
+	for (int i = 2; i <= n; ++i)
+	{
+		current->next = new Person(i);
+		current = current->next;
+	}
+	current->next = head;
+	current = head;
+
+	while (true)
+	{
+		std::cout << current->number << std::endl;
+		current = current->next;
+	}
+
+	// Hint for making the algorithm efficient: think carefully how to determine next player to eliminate
     int winner = -1;
 
     // Be sure to use cout to print out each player as they are eliminated

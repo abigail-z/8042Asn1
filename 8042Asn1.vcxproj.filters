@@ -29,5 +29,8 @@
     <ClInclude Include="Rectangle.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
