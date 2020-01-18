@@ -1,6 +1,4 @@
 #include <iostream>
-#include <list>
-#include <iostream>
 
 #include "Person.h"
 
@@ -18,25 +16,29 @@
 // n is number of passes before elimination
 int Josephus(int m, int n)
 {
-	Person* head = new Person(1);
-	Person* current = head;
-	for (int i = 2; i <= n; ++i)
+	Person* current = CreateCircle(n);
+
+	for (int i = 0; i < n - 1; ++i)
 	{
-		current->next = new Person(i);
-		current = current->next;
+		// skip m
+		for (int j = 0; j < m; ++j)
+		{
+			current = current->next;
+		}
+
+		// print the number to be removed
+		std::cout << current->number << " ";
+
+		// remove it
+		Person* temp = current;
+		current = temp->next;
+		current->prev = temp->prev;
+		temp->prev->next = current;
+		delete temp;
 	}
-	current->next = head;
-	current = head;
 
-	while (true)
-	{
-		std::cout << current->number << std::endl;
-		current = current->next;
-	}
+    int winner = current->number;
+	delete current;
 
-	// Hint for making the algorithm efficient: think carefully how to determine next player to eliminate
-    int winner = -1;
-
-    // Be sure to use cout to print out each player as they are eliminated
-    return winner;
+	return winner;
 }

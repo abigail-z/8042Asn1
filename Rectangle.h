@@ -44,7 +44,6 @@ const Object& findMax(const std::vector<Object>& arr, Comparator isLessThan)
     return arr[maxIndex];
 }
 
-
 // Define the FindMaxByArea() and FindMaxByPerim() functions here
 
 const Rectangle& FindMaxByArea(const std::vector<Rectangle>& arr)
