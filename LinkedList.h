@@ -54,6 +54,7 @@ template <typename T>
 class LinkedList
 {
 public:
+	// Initializer list constructor
 	LinkedList(std::initializer_list<T> init)
 	{
 		head = new ListItem<T>(*init.begin());
@@ -76,14 +77,30 @@ public:
 		tail = current;
 	}
 
+	// Iterator accessor for use by range-based for loops
 	LinkedListIterator<T> begin() const
 	{
 		return LinkedListIterator<T>(head);
 	}
 
+	// Iterator accessor for use by range-based for loops
 	LinkedListIterator<T> end() const
 	{
-		return LinkedListIterator<T>(tail);
+		return LinkedListIterator<T>(nullptr);
+	}
+
+	// Destructor
+	~LinkedList()
+	{
+		ListItem<T>* current = head;
+		while (current != tail)
+		{
+			ListItem<T>* temp = current->next;
+			delete current;
+			current = temp;
+		}
+
+		delete tail;
 	}
 
 private:
