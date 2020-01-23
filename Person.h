@@ -1,7 +1,8 @@
 #pragma once
 
-struct Person
+class Person
 {
+public:
 	Person(int n)
 		: next(nullptr)
 		, prev(nullptr)
@@ -12,9 +13,12 @@ struct Person
 	Person* next;
 	Person* prev;
 	const int number;
+
+	static Person* CreateCircle(int);
 };
 
-Person* CreateCircle(int n)
+// Creates a circular doubly linked list of Person objects.
+Person* Person::CreateCircle(int n)
 {
 	Person* head = new Person(1);
 	Person* current = head;

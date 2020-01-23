@@ -1,5 +1,6 @@
-#include <iostream>
+#pragma once
 
+#include <iostream>
 #include "Person.h"
 
 // The Josephus problem is the following game:
@@ -16,7 +17,7 @@
 // n is number of passes before elimination
 int Josephus(int m, int n)
 {
-	Person* current = CreateCircle(n);
+	Person* current = Person::CreateCircle(n);
 
 	for (int i = 0; i < n - 1; ++i)
 	{
