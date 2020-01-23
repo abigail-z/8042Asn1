@@ -34,12 +34,16 @@ int PerimeterCompare(const Rectangle a, const Rectangle b)
 
 const Rectangle& FindMax(const LinkedList<Rectangle>& list, int (*compare)(const Rectangle, const Rectangle))
 {
-	Rectangle largest = *list.begin();
+	Rectangle& largest = *list.begin();
 	
-	for (const Rectangle rectangle : list)
+	for (const Rectangle& rectangle : list)
+	{
 		if (compare(rectangle, largest) > 0)
+		{
 			largest = rectangle;
-	
+		}
+	}
+
 	return largest;
 }
 

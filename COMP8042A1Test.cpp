@@ -46,8 +46,6 @@ int main()
 		Rectangle(6, 2)
 	};
 
-	cout << AreaCompare(Rectangle(2, 2), Rectangle(1, 1)) << endl;
-
 	
 	cout << "***** Q1: Rectangle class" << endl;
 	for (Rectangle r : recList)

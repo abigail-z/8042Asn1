@@ -14,7 +14,7 @@ struct ListItem
 	}
 
 	ListItem* next;
-	const T data;
+	T data;
 };
 
 
@@ -39,7 +39,7 @@ public:
 		return pointer != other.pointer;
 	}
 
-	const T& operator*() const
+	T& operator*() const
 	{
 		return pointer->data;
 	}
