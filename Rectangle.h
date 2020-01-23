@@ -34,7 +34,7 @@ int PerimeterCompare(const Rectangle a, const Rectangle b)
 	return (aPerimeter < bPerimeter) ? -1 : (aPerimeter > bPerimeter);
 }
 
-const Rectangle& findMax(const LinkedList<Rectangle>& list, ComparisonFunc compare)
+const Rectangle& FindMax(const LinkedList<Rectangle>& list, ComparisonFunc compare)
 {
 	Rectangle largest = *list.begin();
 	
@@ -49,10 +49,10 @@ const Rectangle& findMax(const LinkedList<Rectangle>& list, ComparisonFunc compa
 
 const Rectangle& FindMaxByArea(const LinkedList<Rectangle>& list)
 {
-	return findMax(list, AreaCompare);
+	return FindMax(list, AreaCompare);
 }
 
 const Rectangle& FindMaxByPerim(const LinkedList<Rectangle>& list)
 {
-	return findMax(list, PerimeterCompare);
+	return FindMax(list, PerimeterCompare);
 }
