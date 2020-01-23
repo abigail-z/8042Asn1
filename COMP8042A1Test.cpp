@@ -17,17 +17,17 @@ ostream &operator << (ostream& s, Rectangle r)
 }
 
 template <typename T>
-ostream &operator << (ostream& s, matrix<T>m)
+ostream &operator << (ostream& s, Matrix<T>& m)
 {
-    int rows = m.numrows();
-    int cols = m.numcols();
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < m.Rows(); i++)
     {
-        vector<int> row = m[i];
-        for (int j = 0; j < cols; j++)
-            s << row[j] << " ";
+		for (int j = 0; j < m.Cols(); j++)
+		{
+			s << m[i][j] << " ";
+		}
         s << endl;
     }
+
     return s;
 }
 
@@ -57,16 +57,17 @@ int main()
     cout << "Highest Perimeter: " << FindMaxByPerim(recVec) << endl << endl;
 
     
-    cout << endl << endl << "***** Q2: matrix class" << endl;
-    matrix<int> mat = matrix<int>();
-    cout << "Zero-parameter matrix (rows,cols) = (" << mat.numrows() << "," << mat.numcols() << ")" << endl;
+    cout << endl << endl << "***** Q2: Matrix class" << endl;
+    Matrix<int> matrix = Matrix<int>();
+    cout << "Zero-parameter Matrix (rows,cols) = (" << matrix.Rows() << "," << matrix.Cols() << ")" << endl;
     
-    mat.resize(4, 3);
-    cout << "Resized matrix to 4x3" << endl;
-    cout << mat << endl;
-    mat[2][1] = 12;
+    matrix.Resize(4, 3);
+    cout << "Resized Matrix to 4x3" << endl;
+	matrix[2][1] = 12;
+    cout << matrix << endl;
+    matrix[2][1] = 12;
     cout << "Modified (2,1)" << endl;
-    cout << mat << endl;
+    cout << matrix << endl;
 
     
     cout << endl << endl << "***** Q3: Josephus problem" << endl;

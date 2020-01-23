@@ -1,74 +1,111 @@
 #pragma once
 
-#include <vector>
-
-template <typename Object>
-class matrix
+template <typename T>
+class Matrix
 {
-
 public:
-	matrix(int rows, int cols)
-		: array{rows}
-	{
-		for (auto& thisRow : array)
-			thisRow.resize(cols);
-	}
-
-    matrix(std::initializer_list<std::vector<Object>> lst)
-		: array(lst.size())
-    {
-        int i = 0;
-        for(auto & v : lst)
-            array[i++] = std::move(v);
-    }
-    
-    matrix(const std::vector<std::vector<Object>>& v)
-		: array{v}
+	// Zero-parameter constructor
+	Matrix()
+		: Matrix(0, 0)
 	{
 	}
 
-    matrix(std::vector<std::vector<Object>>&& v)
-		: array{std::move(v)}
+	// Constructor with size parameters
+	Matrix(int rows, int cols)
+		: rows(rows)
+		, cols(cols)
 	{
-	}
+		collection = new T*[rows];
 
-    // *** Provide zero-parameter constructor here
-	matrix()
-		: array ()
-	{
-	}
-
-    const std::vector<Object>& operator[](int row) const
-    {
-        return array[row];
-    }
-
-	std::vector<Object>& operator[](int row)
-    {
-        return array[row];
-    }
-    
-    int numrows() const
-    {
-        return array.size();
-    }
-
-    int numcols() const
-    {
-        return numrows() ? array[0].size() : 0;
-    }
-
-    // *** Provide resize method here
-	void resize(int rows, int cols)
-	{
-		array.resize(rows);
-		for (std::vector<Object>& row : array)
+		for (int i = 0; i < rows; ++i)
 		{
-			row.resize(cols);
+			collection[i] = new T[cols]{};
 		}
 	}
 
-private:
-	std::vector<std::vector<Object>> array;
+	// Copy constructor
+	Matrix(const Matrix<T>& old)
+		: rows(old.rows)
+		, cols(old.cols)
+	{
+		collection = new T * [rows];
 
+		for (int i = 0; i < rows; ++i)
+		{
+			collection[i] = new T[cols];
+
+			for (int j = 0; j < cols; ++j)
+			{
+				collection[i][j] = old.collection[i][j];
+			}
+		}
+	}
+
+	// Destructor
+	~Matrix()
+	{
+		for (int i = 0; i < rows; ++i)
+		{
+			delete[] collection[i];
+		}
+
+		delete[] collection;
+	}
+
+	// Square bracket accessor operator
+	T* operator[] (int row)
+	{
+		return collection[row];
+	}
+	
+	// Row count accessor
+	int Rows() const
+	{
+		return rows;
+	}
+
+	// Column count accessor
+	int Cols() const
+	{
+		return cols;
+	}
+
+	// Resize number of rows and columns
+	void Resize(int rows, int cols)
+	{
+		// initialize new array
+		T** temp = new T*[rows];
+		for (int i = 0; i < rows; ++i)
+		{
+			temp[i] = new T[cols]{};
+		}
+
+		// copy from old array
+		int minRows = rows > this->rows ? this->rows : rows;
+		int minCols = cols > this->cols ? this->cols : cols;
+		for (int i = 0; i < minRows; ++i)
+		{
+			for (int j = 0; j < minCols; ++j)
+			{
+				temp[i][j] = collection[i][j];
+			}
+		}
+		
+		// delete old array
+		for (int i = 0; i < this->rows; ++i)
+		{
+			delete[] collection[i];
+		}
+		delete[] collection;
+
+		// store new data
+		collection = temp;
+		this->rows = rows;
+		this->cols = cols;
+	}
+
+private:
+	T** collection;
+	int rows;
+	int cols;
 };
