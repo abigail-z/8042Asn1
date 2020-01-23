@@ -16,8 +16,6 @@ private:
 
 // Define the AreaCompare and PerimeterCompare functions here
 
-typedef int (*ComparisonFunc)(const Rectangle a, const Rectangle b);
-
 int AreaCompare(const Rectangle a, const Rectangle b)
 {
 	int aArea = a.GetLength() * a.GetWidth();
@@ -34,7 +32,7 @@ int PerimeterCompare(const Rectangle a, const Rectangle b)
 	return (aPerimeter < bPerimeter) ? -1 : (aPerimeter > bPerimeter);
 }
 
-const Rectangle& FindMax(const LinkedList<Rectangle>& list, ComparisonFunc compare)
+const Rectangle& FindMax(const LinkedList<Rectangle>& list, int (*compare)(const Rectangle, const Rectangle))
 {
 	Rectangle largest = *list.begin();
 	
