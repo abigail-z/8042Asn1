@@ -34,6 +34,11 @@ public:
 		return *this;
 	}
 
+	bool operator==(const LinkedListIterator& other)
+	{
+		return pointer == other.pointer;
+	}
+
 	bool operator!=(const LinkedListIterator& other)
 	{
 		return pointer != other.pointer;
